@@ -45,7 +45,7 @@ export default function CustomTabBar({ state, descriptors, navigation }: BottomT
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
           alignItems: 'center',
-          justifyContent: 'space-around',
+          // justifyContent: 'space-around',
           paddingHorizontal: 20,
         }}>
           {state.routes.map((route, index) => {

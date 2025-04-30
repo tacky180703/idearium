@@ -16,7 +16,7 @@ export default function HomeScreen() {
           <Text style={{ fontWeight: '900', fontSize: 28, marginVertical: 3, color: theme.textPrimary }}>こんにちは、Tacky</Text>
           <Text style={{ fontSize: 16, marginVertical: 3, color: theme.textSecondary }}>周りを見渡してみて</Text>
         </View>
-        <StreakCard />
+        {/* <StreakCard /> */}
       </View>
     </SafeAreaView>
   );

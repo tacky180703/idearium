@@ -28,18 +28,6 @@ export default function Layout() {
             tabBarLabel: 'Home',
           }}
         />
-        <Tabs.Screen
-          name="tagManager"
-          options={{
-            tabBarLabel: 'タグ管理',
-          }}
-        />
-        <Tabs.Screen
-          name="addIdea"
-          options={{
-            tabBarLabel: '',
-          }}
-        />
       </Tabs>
     </GestureHandlerRootView>
   );

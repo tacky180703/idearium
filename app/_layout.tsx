@@ -1,7 +1,7 @@
 import { Stack,useRouter } from 'expo-router';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { FlatList, Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import {TouchableOpacity} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect } from 'react';
 import { ThemeProvider as NavigationThemeProvider, DarkTheme} from '@react-navigation/native';
@@ -9,6 +9,7 @@ import { IdeasProvider } from '@/context/IdeasContext';
 import { TagsProvider } from '@/context/TagsContext';
 import { ThemeContext, defaultTheme, useTheme} from '@/context/ThemeContext';
 import { NativeStackHeaderRightProps } from '@react-navigation/native-stack';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -36,44 +37,44 @@ export default function RootLayout() {
   }
 
   return (
-    <IdeasProvider>
-      <TagsProvider>
-        {/* 自作ThemeContextでアプリ用テーマ */}
-        <ThemeContext.Provider value={defaultTheme}>
-          {/* Navigation用ThemeProvider */}
-          <NavigationThemeProvider value={DarkTheme}>
-            <Stack>
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-              <Stack.Screen
-                name="addIdeaModal"
-                options={{
-                  headerShown: false,
-                  contentStyle: {
-                    flex: 1,
-                    backgroundColor: theme.background,
-                  },
-                  presentation: 'formSheet',
-                  gestureDirection: 'vertical',
-                  animation: 'slide_from_bottom',
-                  sheetGrabberVisible: false,
-                  sheetInitialDetentIndex: 0,
-                  sheetAllowedDetents: [1.0],
-                  headerRight: (navigation) => (
-                    <TouchableOpacity
-                      onPress={() => closeAddIdeaModal(navigation)}
-                      style={{ padding: 8 }}
-                    >
-                      <Ionicons name="close" size={24} />
-                    </TouchableOpacity>
-                  ),
-                  gestureEnabled: true,
-                }}
-              />
-            </Stack>
-          </NavigationThemeProvider>
-        </ThemeContext.Provider>
-      </TagsProvider>
-    </IdeasProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <IdeasProvider>
+        <TagsProvider>
+          <ThemeContext.Provider value={defaultTheme}>
+            <NavigationThemeProvider value={DarkTheme}>
+              <Stack>
+                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                <Stack.Screen
+                  name="addIdeaModal"
+                  options={{
+                    headerShown: false,
+                    contentStyle: {
+                      flex: 1,
+                      backgroundColor: theme.background,
+                    },
+                    presentation: 'formSheet',
+                    gestureDirection: 'vertical',
+                    animation: 'slide_from_bottom',
+                    sheetGrabberVisible: false,
+                    sheetInitialDetentIndex: 0,
+                    sheetAllowedDetents: [1.0],
+                    headerRight: (navigation) => (
+                      <TouchableOpacity
+                        onPress={() => closeAddIdeaModal(navigation)}
+                        style={{ padding: 8 }}
+                      >
+                        <Ionicons name="close" size={24} />
+                      </TouchableOpacity>
+                    ),
+                    gestureEnabled: true,
+                  }}
+                />
+              </Stack>
+            </NavigationThemeProvider>
+          </ThemeContext.Provider>
+        </TagsProvider>
+      </IdeasProvider>
+    </GestureHandlerRootView>
   );
 }
 
