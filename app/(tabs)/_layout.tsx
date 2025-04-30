@@ -1,45 +1,46 @@
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
+import CustomTabBar from '@/components/tabBar'; // カスタムタブバー作る！
+import { useTheme } from '@/context/ThemeContext'; 
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+export default function Layout() {
+  const theme = useTheme();
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
+    <GestureHandlerRootView style={{ flex: 1, backgroundColor: theme.background }}>
+      <Tabs
+        tabBar={(props) => <CustomTabBar {...props} />} // カスタムタブバーに差し替え
+        screenOptions={{
+          headerShown: false,
+          tabBarStyle: {
+            backgroundColor: 'transparent',
+            elevation: 0,
+            borderTopWidth: 0,
             position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
           },
-          default: {},
-        }),
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
         }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
+      >
+        <Tabs.Screen
+          name="index"
+          options={{
+            tabBarLabel: 'Home',
+          }}
+        />
+        <Tabs.Screen
+          name="tagManager"
+          options={{
+            tabBarLabel: 'タグ管理',
+          }}
+        />
+        <Tabs.Screen
+          name="addIdea"
+          options={{
+            tabBarLabel: '',
+          }}
+        />
+      </Tabs>
+    </GestureHandlerRootView>
   );
 }
