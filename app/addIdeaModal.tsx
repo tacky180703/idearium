@@ -102,7 +102,12 @@ export default function AddIdeaModal() {
   // };
 
   return (
-    <View style={{ flex: 1, padding: 16 }}>
+    <View style={{
+      flex: 1,
+      padding: 16,
+      borderTopLeftRadius: 24,
+      borderTopRightRadius: 24,
+    }}>
       {/* アイデア名テキストボックス */}
       <Text style={{
         fontWeight: '900',

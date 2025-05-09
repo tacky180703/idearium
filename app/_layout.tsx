@@ -37,7 +37,7 @@ export default function RootLayout() {
   }
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView>
       <IdeasProvider>
         <TagsProvider>
           <ThemeContext.Provider value={defaultTheme}>
@@ -55,17 +55,9 @@ export default function RootLayout() {
                     presentation: 'formSheet',
                     gestureDirection: 'vertical',
                     animation: 'slide_from_bottom',
-                    sheetGrabberVisible: false,
+                    sheetGrabberVisible: true,
                     sheetInitialDetentIndex: 0,
                     sheetAllowedDetents: [1.0],
-                    headerRight: (navigation) => (
-                      <TouchableOpacity
-                        onPress={() => closeAddIdeaModal(navigation)}
-                        style={{ padding: 8 }}
-                      >
-                        <Ionicons name="close" size={24} />
-                      </TouchableOpacity>
-                    ),
                     gestureEnabled: true,
                   }}
                 />

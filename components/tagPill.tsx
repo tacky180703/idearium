@@ -22,7 +22,7 @@ export default function TagPill({
     style={{
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: isSelected ? color : theme.primary,
+        backgroundColor: isSelected ? theme.accent : theme.primary,
         borderRadius: 16,
         paddingHorizontal: 12,
         paddingVertical: 6,
